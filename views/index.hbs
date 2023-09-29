@@ -1,11 +1,12 @@
-<h1>{{tittle}}</h1>
+<h1>{{tittle}}Inicie sesión</h1>
+<h2>Primero vamos a verificar lo siguiente...</h2>
 {{#if conocido}}
-<p>Bienvenid@ {{nombre}} <a href="/salir">Nos vemos Luego</a></p>
+<p>Lo sabemos, puede ingresar{{frase}} <a href="/salir">Nos vemos Luego</a></p>
 {{/if}}
 
 {{#unless conocido}}
-<p>No estás registrado</p>
+<p>Confirme que no es un robot, con la frase "no soy un robot"</p>
 <form action="/ingresar" method="post">
-<input type="text" name="nombre"><button>Ingresar</button>
+<input type="text" name="frase"><button>Ingresar</button>
 </form>
 {{/unless}}

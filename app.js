@@ -21,7 +21,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(session({
-  secret:'sefsdfhdsfwerfwtr',
+  secret:'no soy un robot',
   resave: false,
   saveUninitialized:true
 }))
@@ -32,21 +32,24 @@ app.use(session({
 
 
 app.get('/', function(req,res){
-  var conocido = Boolean(req.session.nombre);
+  var conocido = Boolean(req.session.frase);
 
   res.render('index', { 
     title:'Inicio de sesion',
     conocido: conocido,
-    nombre: req.session.nombre
+    nombre: req.session.frase
   })
 
 });
 
 app.post('/ingresar', function(req,res) {
-  if(req.body.nombre){
-    req.session.nombre = req.body.nombre
+  if(req.body.frase === 'no soy un robot'){
+    req.session.frase = req.body.frase;
+    res.redirect('/');
+  } else {
+    res.status(403).send('Prohibido el ingreso a robots.')
   }
-  res.redirect('/');
+ 
 });
 
 app.get('/salir', function(req,res){
